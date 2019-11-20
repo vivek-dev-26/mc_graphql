@@ -1,5 +1,4 @@
 import { ApolloServer } from "apollo-server";
-import { RandomUserDataSource } from "./RandomUserDataSource";
 import { User } from "./User";
 import { resolvers } from "./resolvers";
 import { typeDefs } from "./typeDef";
@@ -16,7 +15,6 @@ const server = new ApolloServer({
     }
   },
   dataSources: () => ({
-    //randomUserAPI: new RandomUserDataSource(),
     user: new User()
   })
 });

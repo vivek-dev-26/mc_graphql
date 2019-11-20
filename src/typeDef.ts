@@ -7,6 +7,8 @@ const typeDefs = gql`
     _id: ID
     email: String
     password: String
+    created:String
+    _v:Int
   }
 
   type Create {
@@ -25,12 +27,12 @@ const typeDefs = gql`
 
   type Query {
     getUsers: [User!]
-    getUser(id:ID!): User
+    getUser(id:ID!): User!
     getUserDetail(limit: Int, skip: Int): [User]
   }
 
   type Mutation {
-    createUser(email: String, password: String): Create
+    createUser(email: String, password: String): User!
     updateUser(id: String, email: String, password: String): Update
     deleteUser(id: String): Update
   }

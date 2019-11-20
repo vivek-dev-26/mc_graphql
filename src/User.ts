@@ -11,34 +11,33 @@ export class User extends RESTDataSource {
   // }
 
   async getUsers() {
-    const response = await this.get("get");
-    return response.data;
-  }
+    return await this.get(`get`);
+    }
 
   async getUser(id) {
-    const response = await this.get(`/get/${id}`);
-    const res = response.data
-    return res;
+     return await this.get(`get/${id}`);
+    //const res = response.data
+    //return res;
   }
 
   async createUser(details) {
-    const response = await this.post("post", { ...details });
-    return response;
+    return await this.post("post", { ...details });
+    //return response;
   }
 
   async updateUser(id, email, password) {
-    const response = await this.put("put", {
+    return await this.put("put", {
       id,
       email,
       password
     });
-    return response;
+    //return response;
   }
 
   async deleteUser(id) {
     try {
-      const response = await this.delete(`/delete/${id}`);
-      return response;
+      return await this.delete(`delete/${id}`);
+      //return response;
     } catch (error) {
       throw new ApolloError("You cannot delete user");
     }
