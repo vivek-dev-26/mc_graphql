@@ -2,12 +2,19 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
 
- 
   type User {
     _id: ID
+    name: String
+    lastName: String
     email: String
     password: String
-    created:String
+    phonenumber: ID
+    brandname: String
+    streetaddress: String
+    city: String
+    country: String
+    postalcode: Int
+    createdAt: String
     _v:Int
   }
 
@@ -16,30 +23,30 @@ const typeDefs = gql`
     data: User
   }
 
-  type Update {
-    message: String
-    data: Result
-  }
-
-  type Result {
-    id: String
+  type Auth {
+    data: String
   }
 
   type Query {
     getUsers: [User!]
-    getUser(id:ID!): User!
-    getUserDetail(limit: Int, skip: Int): [User]
+    login(email: String, password: String): Auth
   }
 
   type Mutation {
-    createUser(email: String, password: String): User!
-    updateUser(id: String, email: String, password: String): Update
-    deleteUser(id: String): Update
+    createUser(name: String
+      lastName: String
+      email: String
+      password: String
+      phonenumber: ID
+      brandname: String
+      streetaddress: String
+      city: String
+      country: String
+      postalcode: Int): User
   }
 
   type Subscription {
-    userCreated: Create
-    userDeleted: Update
+    userCreated: User
   }
 `;
 

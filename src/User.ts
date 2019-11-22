@@ -1,45 +1,21 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-import { ApolloError } from "apollo-server";
 export class User extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = " http://localhost:3000/api/";
+    this.baseURL = " http://10.1.4.166:5000/v1/";
   }
 
-  // willSendRequest(request) {
-  //   request.headers.set("Authorization", this.context.token);
-  // }
-
   async getUsers() {
-    return await this.get(`get`);
-    }
-
-  async getUser(id) {
-     return await this.get(`get/${id}`);
-    //const res = response.data
-    //return res;
+    const data = await this.get(`users`);
+    return data.data;
   }
 
   async createUser(details) {
-    return await this.post("post", { ...details });
-    //return response;
+    return await this.post("register", { ...details });
   }
 
-  async updateUser(id, email, password) {
-    return await this.put("put", {
-      id,
-      email,
-      password
-    });
-    //return response;
-  }
-
-  async deleteUser(id) {
-    try {
-      return await this.delete(`delete/${id}`);
-      //return response;
-    } catch (error) {
-      throw new ApolloError("You cannot delete user");
-    }
+  async login(_, { email, password }) {
+    const res = await this.post("authenticate", { email, password });
+    return res;
   }
 }
