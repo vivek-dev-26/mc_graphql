@@ -1,8 +1,6 @@
-import fetch from "node-fetch";
 import { PubSub } from "apollo-server";
 
 const user_Added = "USER_ADDED";
-const user_Deleted = "USER_DELETED";
 const pubsub = new PubSub();
 
 export const resolvers = {
@@ -10,33 +8,23 @@ export const resolvers = {
     getUsers: (_, __, { dataSources }) => {
       return dataSources.user.getUsers();
     },
-    getUser: async (_, {id}, { dataSources }) => {
-      return await dataSources.user.getUser(id);
+    login: async (_, { email, password }, { dataSources }) => {
+      const res = await dataSources.user.login(_, { email, password }, { dataSources });
+      return res;
     }
   },
 
   Mutation: {
-    createUser: async (_, { email, password }, { dataSources }) => {
+    createUser: async (_, { name, lastName, email, password, phonenumber, brandname, streetaddress, city, country, postalcode }, { dataSources }) => {
 
-      const res = dataSources.user.createUser({email, password});
-      await pubsub.publish(user_Added, { userCreated: res });
-      return res;
+      const res = await dataSources.user.createUser({ name, lastName, email, password, phonenumber, brandname, streetaddress, city, country, postalcode });
+      await pubsub.publish(user_Added, { userCreated: res.data });
+      return res.data;
     },
-    updateUser: (_, { id,email,password }, { dataSources }) => {
-      return dataSources.user.updateUser(id, email,password);
-    },
-    deleteUser: async (_, { id }, { dataSources }) => {
-      return await dataSources.user.deleteUser(id);
-      //await pubsub.publish(user_Deleted, { userDeleted: res });
-     /// return res;
-    }
   },
   Subscription: {
     userCreated: {
       subscribe: () => pubsub.asyncIterator([user_Added])
     },
-    userDeleted: {
-      subscribe: () => pubsub.asyncIterator([user_Deleted])
-    }
   }
 };
