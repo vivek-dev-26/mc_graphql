@@ -2,7 +2,7 @@ import { RESTDataSource } from "apollo-datasource-rest";
 export class User extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = " http://10.1.4.166:5000/v1/";
+    this.baseURL = process.env.BASE_URL;
   }
 
   async getUsers() {

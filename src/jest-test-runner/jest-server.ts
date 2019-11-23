@@ -1,8 +1,8 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import bodyParser from 'body-parser'
-import { typeDefs } from '../typeDef'
-import { resolvers } from '../resolvers'
+import { typeDefs } from '../typedefs/typeDef'
+import { resolvers } from '../resolvers/resolvers'
 
 const schema = {
     typeDefs,
