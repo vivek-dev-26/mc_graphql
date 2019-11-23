@@ -6,7 +6,7 @@ export class User extends RESTDataSource {
   }
 
   async getUsers() {
-    const data = await this.get(`users`);
+    const data = await this.get('users/list');
     return data.data;
   }
 
@@ -15,7 +15,7 @@ export class User extends RESTDataSource {
   }
 
   async login(_, { email, password }) {
-    const res = await this.post("authenticate", { email, password });
+    const res = await this.post("login", { email, password });
     return res;
   }
 }
