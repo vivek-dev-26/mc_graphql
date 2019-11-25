@@ -1,4 +1,4 @@
-import express from 'express'
+import * as express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import { typeDefs } from '../typedefs/typeDef'

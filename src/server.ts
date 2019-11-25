@@ -17,7 +17,9 @@ export default class Server {
         if (connection) {
           return connection.context;
         } else {
-          const token = req.headers.authorization || "";
+          const token = `Bearer ${req.headers.authorization}` || "";
+
+          // console.log(token)
           return { token };
         }
       },

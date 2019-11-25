@@ -5,8 +5,8 @@ export class User extends RESTDataSource {
     this.baseURL = process.env.BASE_URL;
   }
 
-  async getUsers() {
-    const data = await this.get('users/list');
+  async getUsers(details) {
+    const data = await this.get('users/list', { ...details });
     return data.data;
   }
 

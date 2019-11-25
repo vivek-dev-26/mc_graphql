@@ -1,4 +1,4 @@
-import fs from 'fs'
+// import fs from 'fs'
 import { makeExecutableSchema } from 'graphql-tools'
 import { graphql } from 'graphql'
 import { resolvers } from '../resolvers/resolvers'
